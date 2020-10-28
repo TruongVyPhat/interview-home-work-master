@@ -20,6 +20,23 @@ exports.get_all_posts = (req, res) => {
     });
 }
 
+exports.get_all_titles = (req, res) => {
+
+    service.get_all_title()
+    .then(posts => {       
+        if (posts.length > 0){
+            status = httpStatus.OK; 
+            res.status(status).json(responseJS.Json(status, posts));
+        } else {
+            status = httpStatus.NOT_FOUND;
+            res.status(status).json(responseJS.mess_Json(status));
+        }
+    }).catch(error => {
+        res.status(status).json(error);
+    });
+}
+
+
 exports.get_post = (req, res) => {
     const id = req.params.id ? req.params.id : null;
 

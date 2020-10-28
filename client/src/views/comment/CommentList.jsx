@@ -6,7 +6,7 @@ const CommentList = ({ list }) => (
 	<Comment.Group>
 		{list.length > 0 &&
 			list.map((item) => (
-				<Comment>
+				<Comment key={item.id}>
 					<Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
 					<Comment.Content>
 						<Comment.Author as="a">{item.name}</Comment.Author>

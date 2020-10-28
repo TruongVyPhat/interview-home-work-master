@@ -9,6 +9,12 @@ const post_Controller = require('./PostControlller');
 router.get('/', post_Controller.get_all_posts);
 
 /**
+ * GET all titles for search tool
+ * url: /posts/titles
+ */
+router.get('/titles', post_Controller.get_all_titles);
+
+/**
  * GET all posts
  * url: /posts/:id
  */

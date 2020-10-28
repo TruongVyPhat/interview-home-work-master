@@ -19,6 +19,15 @@ const PostService = {
 			throw new PostServiceError(e.response.status, e.response.data.message);
 		}
     },
+
+    get_all_titles: async function() {
+		try {
+			const response = await axios.get('/api/posts/titles');
+			return response.data;
+		} catch (e) {
+			throw new PostServiceError(e.response.status, e.response.data.message);
+		}
+    },
     
     get_detail: async function(id) {
 		try {

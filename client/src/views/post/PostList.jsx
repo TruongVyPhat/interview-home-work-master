@@ -5,6 +5,7 @@ import CommentService, { CommentServiceError } from '../../service/comment.servi
 import Comment from '../comment/CommentList';
 import { useHistory } from "react-router-dom";
 import Moment from 'react-moment';
+import Search from './Search';
 
 const PostList = ({ list }) => {
     const history = useHistory();
@@ -16,12 +17,13 @@ const PostList = ({ list }) => {
         setActiveIndex(newIndex);
     };
     useEffect(() => {
-        getLastedComments(activeIndex);
+        if (activeIndex > 0)
+            getLastedComments(activeIndex);
     }, [ activeIndex ]);
 
     const getLastedComments = async (post_id) => {
         try {
-			const response = await CommentService.get_lasted(post_id);
+			const response = await CommentService.get_all(post_id);
 			if (response.message === 'OK') {
 				setComments(response.data);
 			}
@@ -38,9 +40,10 @@ const PostList = ({ list }) => {
     
 	return (
 		<div>
+            <Search/>
 			{list.length > 0 &&
 				list.map((item) => (
-					<Card style={{ width: '100%' }}>
+					<Card style={{ width: '100%' }} key={item.id}>
 						<Card.Body>
 							<Card.Title>{item.title}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Author: {item.name}</Card.Subtitle>
