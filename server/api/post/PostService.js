@@ -1,16 +1,41 @@
-const User = require('./User');
+const Post = require('./Post');
 const db = require('../../models/index');
 const sequelize = db.sequelize;
 const { QueryTypes } = require('sequelize');
+const CONSTANTS = require('../../helpers/constants');
 
 exports.get_all_posts = (page) => {
-    let offset = null;
-    let sql = 'Select us.*, ro.title as role from public.User us JOIN public.role ro on ro.id = us.role_id order by us.id';
+    let sql = `select p.*, us.name, count(cm.id) as num from public."Post" p join public."User" us on us.id = p.created_by
+                left join public."Comment" cm on cm.post_id = p.id group by p.id, us.name order by created_at desc`;
     if (page){
-        offset = (page - 1) * CONSTANTS.PAGE_SIZE;
-        sql += ` LIMIT ${CONSTANTS.PAGE_SIZE} OFFSET ${offset}`;
+        const offset = (page - 1) * CONSTANTS.page_limit;
+        sql += ` LIMIT ${CONSTANTS.page_limit} OFFSET ${offset}`;
     }
     return sequelize.query(sql, { 
         type: QueryTypes.SELECT
+    });
+}
+
+exports.get_post = (id) => {
+    const sql = `select p.*, us.name from public."Post" p join public."User" us on us.id = p.created_by where p.id = ?`;
+    return sequelize.query(sql, {
+        replacements: [id],
+        type: QueryTypes.SELECT
+    });
+}
+
+exports.get_posts_by_keyword = (keyword) => {
+    const sql = `select p.*, us.name from public."Post" p join public."User" us on us.id = p.created_by LOWER(replace((select convertTVkdau(title)),' ','')) like ?`;
+    return sequelize.query(sql, {
+        replacements: [keyword],
+        type: QueryTypes.SELECT
+    });
+}
+
+exports.create_post = (keyword) => {
+    const sql = `INSERT`;
+    return sequelize.query(sql, {
+        replacements: [keyword],
+        type: QueryTypes.INSERT
     });
 }
