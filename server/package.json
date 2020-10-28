@@ -14,7 +14,8 @@
     "morgan": "~1.9.1",
     "pg": "^8.4.2",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "sequelize-auto": "^0.6.5"
   },
   "devDependencies": {
     "sequelize-cli": "^6.2.0"
