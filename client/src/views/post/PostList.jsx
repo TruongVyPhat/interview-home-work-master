@@ -47,7 +47,7 @@ const PostList = ({ list }) => {
 						<Card.Body>
 							<Card.Title>{item.title}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Author: {item.name}</Card.Subtitle>
-                            <Card.Subtitle className="mb-2 text-muted">Created at: <Moment format="hh:mm:ss DD/MM/YYYY">{item.created_at}</Moment></Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">Created at: <Moment>{item.created_at}</Moment></Card.Subtitle>
 							<Card.Text>
 								{item.content.substring(0, 300) + `...`}
                                 <Card.Link onClick={e => handleSeeDetail(item.id)}>See more</Card.Link>

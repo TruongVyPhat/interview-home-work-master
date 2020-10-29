@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "InterviewTest",
-    "host": "127.0.0.1",
+    "host": "database-1.chsrphzx6pyi.us-east-2.rds.amazonaws.com",
     "dialect": "postgres",
     "operatorsAliases": false
   },

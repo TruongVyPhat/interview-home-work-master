@@ -5,8 +5,8 @@ const { QueryTypes } = require('sequelize');
 const CONSTANTS = require('../../helpers/constants');
 
 exports.get_all_posts = (page) => {
-    let sql = `select p.*, us.name, count(cm.id) as num from public."Post" p join public."User" us on us.id = p.created_by
-                left join public."Comment" cm on cm.post_id = p.id group by p.id, us.name order by created_at desc`;
+    let sql = `select p.*, us.name, us.avatar, count(cm.id) as num from public."Post" p join public."User" us on us.id = p.created_by
+                left join public."Comment" cm on cm.post_id = p.id group by p.id, us.name, us.avatar order by created_at desc`;
     if (page){
         const offset = (page - 1) * CONSTANTS.page_limit;
         sql += ` LIMIT ${CONSTANTS.page_limit} OFFSET ${offset}`;
@@ -17,8 +17,8 @@ exports.get_all_posts = (page) => {
 }
 
 exports.get_post = (id) => {
-    const sql = `select p.*, us.name, count(cm.id) as num from public."Post" p join public."User" us on us.id = p.created_by left join public."Comment" cm on
-                cm.post_id = p.id where p.id = ? group by p.id, us.name`;
+    const sql = `select p.*, us.name, us.avatar, count(cm.id) as num from public."Post" p join public."User" us on us.id = p.created_by left join public."Comment" cm on
+                cm.post_id = p.id where p.id = ? group by p.id, us.name, us.avatar`;
     return sequelize.query(sql, {
         replacements: [id],
         type: QueryTypes.SELECT

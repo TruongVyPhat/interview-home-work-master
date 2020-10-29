@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Tab } from 'semantic-ui-react';
+import { Tab, Image, Menu } from 'semantic-ui-react';
 import PostLayout from './PostLayout';
 import PostDetail from '../views/post/PostDetail';
+import logo from '../public/image/zigvy-logo.jpg'
 
 const panes = [
 	{
-		menuItem: 'Logo',
+		menuItem: (
+			<Menu.Item >
+			  	<Image src={logo} size='tiny' style={{paddingRight: "20px"}}/> Zigvy
+			</Menu.Item>
+		),
 		render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane>
 	},
 	{
@@ -13,7 +18,11 @@ const panes = [
 		render: () => <Tab.Pane attached={false}><PostLayout/></Tab.Pane>
 	},
 	{
-		menuItem: 'User',
+		menuItem: (
+			<Menu.Item key='user'>
+			  	User<Image src='https://react.semantic-ui.com/images/avatar/large/elliot.jpg' size='tiny' style={{paddingLeft: "20px"}}/>
+			</Menu.Item>
+		),
 		render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane>
 	}
 ];

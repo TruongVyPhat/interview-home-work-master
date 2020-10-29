@@ -39,7 +39,7 @@ const PostDetail = ({ id }) => {
 				<Card.Title>{Post.title}</Card.Title>
 				<Card.Subtitle className="mb-2 text-muted">Author: {Post.name}</Card.Subtitle>
 				<Card.Subtitle className="mb-2 text-muted">
-					Created at: <Moment format="hh:mm:ss DD/MM/YYYY">{Post.created_at}</Moment>
+					Created at: <Moment>{Post.created_at}</Moment>
 				</Card.Subtitle>
 				<Card.Text>
 					{Post.content}
