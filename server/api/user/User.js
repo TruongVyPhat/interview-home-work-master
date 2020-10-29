@@ -12,6 +12,26 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       comment: "null"
+    },
+    'password': {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      comment: "null"
+    },
+    'avatar': {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "null"
+    },
+    'access_token': {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "null"
+    },
+    'refres_token': {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'User'
