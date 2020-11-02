@@ -5,7 +5,7 @@ const commentReducer = (state = [], action) => {
 		case commentAction.FETCHING_COMMENT_SUCCESS:
 			return action.data;
 		case commentAction.FETCHING_COMMENT_FAIL:
-			return state;
+			return [];
 		default:
 			return state;
 	}

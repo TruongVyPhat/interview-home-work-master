@@ -5,7 +5,7 @@ const postReducer = (state = [], action) => {
 		case postAction.FETCHING_LIST_SUCCESS:
 			return action.data;
 		case postAction.FETCHING_LIST_FAIL:
-			return state;
+			return [];
 		default:
 			return state;
 	}
