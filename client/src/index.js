@@ -6,13 +6,31 @@ import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ApiService from './service/api.service';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
+import Reducers from './reducers/index';
+import rootSaga from './saga/rootSaga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+// create a redux store with our reducer above and middleware
+let store = createStore(Reducers, composeWithDevTools(
+  applyMiddleware(sagaMiddleware),
+  // other store enhancers if any
+));
+
+// run the saga
+sagaMiddleware.run(rootSaga);
 
 ApiService.init('http://localhost:8080');
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

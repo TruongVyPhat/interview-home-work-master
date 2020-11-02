@@ -6,15 +6,11 @@ const App = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route exact path='/'>
+				<Route exact path="/">
 					<Redirect to="/posts" />
 				</Route>
-				<Route path="/posts/:id"
-					render={props => <Layout {...props}/>}
-				/>
-				<Route path="/posts"
-					render={props => <Layout {...props}/>}
-				/>
+				<Route path="/posts/:id" render={(props) => <Layout {...props} />} />
+				<Route path="/posts" render={(props) => <Layout {...props} />} />
 			</Switch>
 		</Router>
 	);

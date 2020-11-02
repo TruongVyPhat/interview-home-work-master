@@ -1,38 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import PostService, { PostServiceError } from '../../service/post.service';
-import CommentService, { CommentServiceError } from '../../service/comment.service';
 import Comment from '../comment/CommentList';
 import Moment from 'react-moment';
+import { useSelector, useDispatch } from 'react-redux';
+import { watchComment } from '../../actions/comment.action';
+import { watchDetail } from '../../actions/selected.action';
 
 const PostDetail = ({ id }) => {
-    const [ Post, setPost ] = useState({});
-    const [ comments, setComments ] = useState([]);
-	useEffect(() => {
-        getPost(id);
-        getComments(id);
-    }, [ id ]);
+    const Post = useSelector((state) => state.selectedPost);
+	const comments = useSelector((state) => state.comment);
+	const dispatch = useDispatch();
 
-	const getPost = async (id) => {
-		try {
-			const response = await PostService.get_detail(id);
-			if (response.message === 'OK') {
-				setPost(response.data);
-			}
-		} catch (e) {
-			setPost({});
-		}
-    };
-    const getComments = async (id) => {
-		try {
-			const response = await CommentService.get_all(id);
-			if (response.message === 'OK') {
-				setComments(response.data);
-			}
-		} catch (e) {
-			setComments([]);
-		}
-	};
+	useEffect(() => {
+		dispatch(watchComment(id));
+		dispatch(watchDetail(id));
+	}, [ id ]);
+	
 	return (
 		<Card style={{ width: '100%' }}>
 			<Card.Body>

@@ -8,7 +8,7 @@ const panes = [
 	{
 		menuItem: (
 			<Menu.Item >
-			  	<Image src={logo} size='tiny' style={{paddingRight: "20px"}}/> Zigvy
+				<Image src={logo} size='tiny' style={{paddingRight: "20px"}}/> Zigvy
 			</Menu.Item>
 		),
 		render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane>
@@ -20,7 +20,7 @@ const panes = [
 	{
 		menuItem: (
 			<Menu.Item key='user'>
-			  	User<Image src='https://react.semantic-ui.com/images/avatar/large/elliot.jpg' size='tiny' style={{paddingLeft: "20px"}}/>
+				User<Image src='https://react.semantic-ui.com/images/avatar/large/elliot.jpg' size='tiny' style={{paddingLeft: "20px"}}/>
 			</Menu.Item>
 		),
 		render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane>

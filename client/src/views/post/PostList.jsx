@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import { Accordion, Icon } from 'semantic-ui-react';
-import CommentService, { CommentServiceError } from '../../service/comment.service';
 import Comment from '../comment/CommentList';
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { watchComment } from '../../actions/comment.action';
 import Moment from 'react-moment';
 import Search from './Search';
 
 const PostList = ({ list }) => {
     const history = useHistory();
     const [ activeIndex, setActiveIndex ] = useState(0);
-    const [ comments, setComments ] = useState([]);
+    const comments = useSelector((state) => state.comment);
+    const dispatch = useDispatch();
+
     const handleClick = (e, titleProps) => {
-        const { index } = titleProps
+        const { index } = titleProps;
         const newIndex = activeIndex === index ? -1 : index
         setActiveIndex(newIndex);
     };
     useEffect(() => {
         if (activeIndex > 0)
-            getLastedComments(activeIndex);
+            dispatch(watchComment(activeIndex));
     }, [ activeIndex ]);
 
-    const getLastedComments = async (post_id) => {
-        try {
-			const response = await CommentService.get_all(post_id);
-			if (response.message === 'OK') {
-				setComments(response.data);
-			}
-		} catch (e) {
-			setComments([]);
-		};
-    }
     const handleSeeDetail = (id) => {
         if (id > 0){
             history.push(`/posts/${id}`);
